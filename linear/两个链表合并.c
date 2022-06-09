@@ -138,15 +138,15 @@ void ListMerge(SLNode *La, SLNode *Lb)
     int pos = 0;
     for (int i = 0; i < ListLength(La); i++)
     {
-        ListGet(La, i, &aItem);
-        ListGet(Lb, pos, &bItem);
-        if (bItem <= aItem)
+        ListGet(La, i, &aItem);   // 获取La第i个元素的值
+        ListGet(Lb, pos, &bItem); // 获取Lb第pos个元素的值
+        if (bItem <= aItem)       // 当 Lb第pos个元素的值 小于等于 La第i个元素的值
         {
-            ListInsert(La, i, bItem);
+            ListInsert(La, i, bItem); // 插入到La的第i个位置
             pos++;
         }
     }
-    while (pos < ListLength(Lb))
+    while (pos < ListLength(Lb)) // 将剩下的Lb中的元素依次插入到La中的末尾
     {
         ListGet(Lb, pos, &bItem);
         ListInsert(La, ListLength(La), bItem);
@@ -174,34 +174,12 @@ void main(void)
         return;
     }
 
-    // for (i = 0; i < ListLength(head); i++)
-    // {
-    //     if (ListGet(head, i, &x) == 0) /*取元素*/
-    //     {
-    //         printf("错误! \n");
-    //         return;
-    //     }
-    //     else
-    //         printf("%d    ", x); /*显示数据元素*/
-    // }
-
     SLNode *head2;
     ListInitiate(&head2);
     ListInsert(head2, 0, 0);
     ListInsert(head2, 1, 3);
     ListInsert(head2, 2, 5);
     ListInsert(head2, 3, 7);
-
-    // for (i = 0; i < ListLength(head2); i++)
-    // {
-    //     if (ListGet(head2, i, &x) == 0) /*取元素*/
-    //     {
-    //         printf("错误! \n");
-    //         return;
-    //     }
-    //     else
-    //         printf("%d    ", x); /*显示数据元素*/
-    // }
 
     ListMerge(head, head2);
 
