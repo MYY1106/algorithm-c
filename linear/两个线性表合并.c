@@ -14,7 +14,7 @@ int ListInsert(SeqList *L, int i, DataType x);
 int ListDelete(SeqList *L, int i, DataType *x);
 int ListGet(SeqList L, int i, DataType *x);
 void ListShow(SeqList L);
-int ListMerge(SeqList *La, SeqList Lb);
+void ListMerge(SeqList *La, SeqList Lb);
 
 int main(void)
 {
@@ -129,22 +129,30 @@ void ListShow(SeqList L)
     }
 }
 
-/* 合并两个有序表 */
-/* 将Lb的元素插入到La */
-int ListMerge(SeqList *La, SeqList Lb)
+/*
+    将Lb合并到La中
+    La 线性表结构体的指针
+    Lb 线性表结构体
+*/
+void ListMerge(SeqList *La, SeqList Lb)
 {
     int j = 0;
     for (int i = 0; i < La->size; i++)
     {
         // 1 2 3 6 7
-        // 1 6 5
-        if (Lb.list[j] < La->list[i])
+        // 1 4 6
+        if (Lb.list[j] < La->list[i]) // 当 Lb.list[j] 小于 La->list[i]
         {
-            ListInsert(La, i, Lb.list[j]);
-            if (j != Lb.size - 1)
-                j++;
+            ListInsert(La, i, Lb.list[j]); // 说明此时Lb.list[j]可以插入到La中了，不然就不能有序
+            if (j != Lb.size - 1)          // 如果此时还没遍历到Lb的末尾
+                j++;                       // 则继续遍历
             else
-                break;
+                break; // 否则退出循环
         }
+    }
+    while (j < Lb.size - 1)
+    {
+        ListInsert(La, La->size, Lb.list[j]);
+        j++;
     }
 }
