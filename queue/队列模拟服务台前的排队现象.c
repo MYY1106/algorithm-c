@@ -65,7 +65,7 @@ int main(void)
     clientTime = clientTime + (clock - arriveTime); // 将该客户的等待时间累计到客户的总等待时间
     clientCount++;                                  // 累计客户人数
 
-    printf("工作人员等待时间：%d\n客户等待时间：%d\n客户数：%d\n", staffTime, clientTime, clientCount);
+    printf("工作人员等待时间：%d\n客户平均等待时间：%lf\n客户数：%d\n", staffTime, (float)clientTime / clientCount, clientCount);
     return 0;
 }
 
