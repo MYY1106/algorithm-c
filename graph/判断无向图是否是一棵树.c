@@ -12,14 +12,14 @@ typedef enum
 typedef struct vertex
 {
     char data;
-} Vertex;
+} Vertex; // 顶点
 
 typedef struct amgrath
 {
     Vertex vertexes[MAX_VEX];    // 顶点数组
     int edges[MAX_VEX][MAX_VEX]; // 邻接矩阵
     int vertexCnt, edgeCnt;      // 图中当前的顶点数和边数
-} AMGraph;
+} AMGraph;                       // 图
 
 AMGraph *createAMGraph();
 boolean isTree(AMGraph *graph);
@@ -95,6 +95,6 @@ void DFSForAM(AMGraph *graph, int i, boolean *visited)
 {
     visited[i] = TRUE; // 将该点标记为已遍历
     for (int j = 0; j < graph->vertexCnt; j++)
-        if (!visited[j] && graph->edges[i][j] == 1)
+        if (!visited[j] && graph->edges[i][j] == 1) // 该点未被访问过，且与visited[i]互为邻接顶点
             DFSForAM(graph, j, visited);
 }

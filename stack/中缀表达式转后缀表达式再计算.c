@@ -51,10 +51,9 @@ void popNumStack(NumStack *stack);
 
 int main(void)
 {
-    // char str[MAX_SIZE] = "3-2*7+9*(4*2+2)/5";
     char str[MAX_SIZE];
     char suffix[MAX_SIZE] = ""; // 存放后缀表达式
-    // printf("请输入中缀表达式，支持小数（如：1+2*4+9*(6*9+2)/5 或 1.7+2*4+9*(6*9+2)/5）：\n");
+    printf("请输入中缀表达式，支持多位数（如：1+2*4+9*(6*9+2)/5 或 17+20*4+9*(64*9+2)/5）：\n");
     gets(str); // 会把换行符吸收了，所以不用管换行符的问题
     infixToSuffix(str, suffix);
     calSuffix(suffix);
@@ -73,10 +72,10 @@ float calSuffix(char *suffix)
     /* 继续获取其他的子字符串 */
     while (token != NULL)
     {
-        calculate(numStack, token);
-        token = strtok(NULL, " "); // strtok()使用static变量存放下一次待分割字符串的地址,当传入str为NULL时使用该地址继续分割,即后续strtok()调用是通过static变量与第一次strtok()关联的
+        calculate(numStack, token); // 执行判断操作
+        token = strtok(NULL, " ");  // strtok()使用static变量存放下一次待分割字符串的地址,当传入str为NULL时使用该地址继续分割,即后续strtok()调用是通过static变量与第一次strtok()关联的
     }
-    float res = numStack->rear->val;
+    float res = numStack->rear->val; // 得到最后的计算结果
     popNumStack(numStack);
     printf("result=%f", res);
     return 0;
@@ -85,17 +84,17 @@ float calSuffix(char *suffix)
 void calculate(NumStack *stack, char *str)
 {
     float res;
-    if (isNum(str))
+    if (isNum(str)) // 如果是数字
     {
-        pushNumStack(stack, atoi(str));
+        pushNumStack(stack, atoi(str)); // 入栈
     }
-    else
+    else // 若是字符
     {
-        float a = stack->rear->val;
+        float a = stack->rear->val; // 栈顶的第一个元素
         popNumStack(stack);
-        float b = stack->rear->val;
+        float b = stack->rear->val; // 栈顶的第二个元素
         popNumStack(stack);
-        switch (str[0])
+        switch (str[0]) // 计算
         {
         case '+':
             res = a + b;
@@ -110,7 +109,7 @@ void calculate(NumStack *stack, char *str)
             res = b / a;
             break;
         }
-        pushNumStack(stack, res);
+        pushNumStack(stack, res); // 将计算结果推入栈中
     }
 }
 
