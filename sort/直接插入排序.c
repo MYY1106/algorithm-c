@@ -17,7 +17,6 @@ typedef struct list
 
 void initSqList(SqList *L);
 void insertSqList(SqList *L, int pos, Item e);
-void deleteSqList(SqList *L, int pos);
 void showSqList(SqList *L);
 void insertSort(SqList *L);
 
@@ -26,9 +25,14 @@ int main(void)
     SqList L;
     initSqList(&L);
     insertSqList(&L, 0, (Item){"myy", 7});
+    insertSqList(&L, 0, (Item){"dad", 10});
+    insertSqList(&L, 0, (Item){"sdf", 9});
+    insertSqList(&L, 0, (Item){"dqd", 435});
+    insertSqList(&L, 0, (Item){"sdf", 3});
     insertSqList(&L, 0, (Item){"ddd", 10});
-    insertSqList(&L, 0, (Item){"sdf", 10});
-    showSqList(&L);
+    insertSqList(&L, 0, (Item){"sjw", 50});
+    insertSqList(&L, 0, (Item){"ddd", 23});
+    insertSqList(&L, 0, (Item){"adf", 10});
     insertSort(&L);
     showSqList(&L);
     return 0;
@@ -72,21 +76,6 @@ void insertSqList(SqList *L, int pos, Item e)
     }
 }
 
-// 删除元素
-void deleteSqList(SqList *L, int pos)
-{
-    if (pos >= L->length || pos < 0)
-    {
-        printf("Illegal delete position!");
-        exit(0);
-    }
-    for (int i = pos; i < L->length - 1; i++)
-    {
-        L->students[i] = L->students[i + 1];
-    }
-    L->length--;
-}
-
 // 打印线性表
 void showSqList(SqList *L)
 {
@@ -95,7 +84,7 @@ void showSqList(SqList *L)
     int tmpScore = -1;
     for (int i = 0; i < L->length; i++)
     {
-        rank = tmpScore == L->students[i].score ? rank : ++rank;
+        rank = tmpScore == L->students[i].score ? rank : i + 1;
         tmpScore = L->students[i].score;
         printf("第%d名：%s-%d\n", rank, L->students[i].name, L->students[i].score);
     }

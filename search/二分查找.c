@@ -16,7 +16,6 @@ typedef struct list
 
 void initSqList(SqList *L);
 void insertSqList(SqList *L, int pos, Item e);
-void deleteSqList(SqList *L, int pos);
 void showSqList(SqList *L);
 int BinarySearch(SqList *L, int key);
 
@@ -76,21 +75,6 @@ void insertSqList(SqList *L, int pos, Item e)
         L->items[pos] = e;
         L->length++;
     }
-}
-
-// 删除元素
-void deleteSqList(SqList *L, int pos)
-{
-    if (pos >= L->length || pos < 0)
-    {
-        printf("Illegal delete position!");
-        exit(0);
-    }
-    for (int i = pos; i < L->length - 1; i++)
-    {
-        L->items[i] = L->items[i + 1];
-    }
-    L->length--;
 }
 
 // 打印线性表

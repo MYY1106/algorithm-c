@@ -27,7 +27,6 @@ Node *createNode(int arrive, int treat);
 void pushQueue(Queue *queue, int arrive, int treat);
 void popQueue(Queue *queue);
 bool isQueueEmpty(Queue *queue);
-void showQueue(Queue *queue);
 
 int main(void)
 {
@@ -134,18 +133,4 @@ void popQueue(Queue *queue)
 bool isQueueEmpty(Queue *queue)
 {
     return queue->front == NULL && queue->rear == NULL;
-}
-
-// ´òÓ¡¶ÓÁÐ
-void showQueue(Queue *queue)
-{
-    Node *node = queue->front;
-    int i = 1;
-    printf("--------\n");
-    while (node != NULL)
-    {
-        printf("%d: arrive:%d, treat:%d\n", i++, node->data.arrive, node->data.treat);
-        node = node->next;
-    }
-    printf("--------\n");
 }

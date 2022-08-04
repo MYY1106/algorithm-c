@@ -18,26 +18,24 @@ void ListMerge(SeqList *La, SeqList Lb);
 
 int main(void)
 {
-    SeqList myList, Listb;
+    SeqList listA, listB;
     int i, x;
-    ListInitiate(&myList);
+    ListInitiate(&listA);
     for (i = 0; i < 10; i++)
-        ListInsert(&myList, i, i + 1);
-    ListDelete(&myList, 4, &x);
-    ListDelete(&myList, 3, &x);
-    ListShow(myList);
-    // for (i = 0; i < ListLength(myList); i++)
-    // {
-    //     ListGet(myList, i, &x);
-    //     printf("%d: %d\n", i, x);
-    // }
-    ListInitiate(&Listb);
-    ListInsert(&Listb, 0, 1);
-    ListInsert(&Listb, 1, 4);
-    ListInsert(&Listb, 2, 6);
-    ListShow(Listb);
-    ListMerge(&myList, Listb);
-    ListShow(myList);
+        ListInsert(&listA, i, i + 1);
+    ListDelete(&listA, 4, &x);
+    ListDelete(&listA, 3, &x);
+    printf("List A: \n");
+    ListShow(listA);
+    ListInitiate(&listB);
+    ListInsert(&listB, 0, 1);
+    ListInsert(&listB, 1, 4);
+    ListInsert(&listB, 2, 6);
+    printf("List B: \n");
+    ListShow(listB);
+    ListMerge(&listA, listB);
+    printf("after merge, List A: \n");
+    ListShow(listA);
 }
 
 /* ³õÊ¼»¯Ë³Ðò±íL */
@@ -121,12 +119,12 @@ int ListGet(SeqList L, int i, DataType *x)
 void ListShow(SeqList L)
 {
     int i, x;
-    printf("---------------\n");
     for (i = 0; i < ListLength(L); i++)
     {
         ListGet(L, i, &x);
         printf("%d: %d\n", i, x);
     }
+    printf("---------------\n");
 }
 
 /*
